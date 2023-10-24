@@ -3,6 +3,9 @@
 This repository contains the source code and materials related to the "Laravel Blog Creation" course. 
 The course is designed for learning how to create a blog using [Laravel](https://laravel.com/) with [Docker](https://www.docker.com/) containers
 
+## Html template
+[edica.html](https://www.bootstrapdash.com/product/edica)
+
 ## Use
 
 1. Clone repo:
