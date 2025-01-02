@@ -170,7 +170,7 @@
 
     self.setContent = function($node) {
       $node.html('<p contenteditable="false">' + self.icon + ' ' + lang.databasic.name + ': ' +
-        $node.attr('data-test') + '</p>');
+        escapeHtml($node.attr('data-test')) + '</p>');
     };
 
     self.updateNode = function(info) {
@@ -288,4 +288,16 @@
     },
 
   });
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(match) {
+        const escapeMap = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        };
+        return escapeMap[match];
+      });
+    }
 }));
