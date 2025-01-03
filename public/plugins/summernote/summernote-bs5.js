@@ -6476,32 +6476,36 @@ var CodeView = /*#__PURE__*/function () {
 
         if (this.options.codeviewIframeFilter) {
           var whitelist = this.options.codeviewIframeWhitelistSrc.concat(this.options.codeviewIframeWhitelistSrcBase);
-          value = value.replace(/(<iframe.*?>.*?(?:<\/iframe>)?)/gi, function (tag) {
-            // remove if src attribute is duplicated
-            if (/<.+src(?==?('|"|\s)?)[\s\S]+src(?=('|"|\s)?)[^>]*?>/i.test(tag)) {
-              return '';
-            }
-
-            var _iterator = _createForOfIteratorHelper(whitelist),
-                _step;
-
-            try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var src = _step.value;
-
-                // pass if src is trusted
-                if (new RegExp('src="(https?:)?\/\/' + src.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '\/(.+)"').test(tag)) {
-                  return tag;
-                }
+          var previous;
+          do {
+            previous = value;
+            value = value.replace(/(<iframe.*?>.*?(?:<\/iframe>)?)/gi, function (tag) {
+              // remove if src attribute is duplicated
+              if (/<.+src(?==?('|"|\s)?)[\s\S]+src(?=('|"|\s)?)[^>]*?>/i.test(tag)) {
+                return '';
               }
-            } catch (err) {
-              _iterator.e(err);
-            } finally {
-              _iterator.f();
-            }
 
-            return '';
-          });
+              var _iterator = _createForOfIteratorHelper(whitelist),
+                  _step;
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  var src = _step.value;
+
+                  // pass if src is trusted
+                  if (new RegExp('src="(https?:)?\/\/' + src.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '\/(.+)"').test(tag)) {
+                    return tag;
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
+              return '';
+            });
+          } while (value !== previous);
         }
       }
 
