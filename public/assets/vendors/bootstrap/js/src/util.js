@@ -87,9 +87,11 @@ const Util = {
     }
 
     try {
-      const $temp = document.createElement('div')
-      $temp.innerHTML = selector
-      selector = $temp.textContent || $temp.innerText || ''
+      // Validate the selector to ensure it only contains safe characters
+      const safeSelectorPattern = /^[#.\w-]+$/
+      if (!safeSelectorPattern.test(selector)) {
+        return null
+      }
       return document.querySelector(selector) ? selector : null
     } catch (err) {
       return null
