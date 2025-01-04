@@ -162,7 +162,8 @@
       }
 
       try {
-        return document.querySelector(selector) ? selector : null;
+        var safeSelector = $.escapeSelector(selector);
+        return document.querySelector(safeSelector) ? safeSelector : null;
       } catch (err) {
         return null;
       }
@@ -1150,7 +1151,11 @@
         return;
       }
 
-      var target = $(selector)[0];
+      var target = document.querySelector(selector);
+
+      if (!target || !$(target).hasClass(ClassName$2.CAROUSEL)) {
+        return;
+      }
 
       if (!target || !$(target).hasClass(ClassName$2.CAROUSEL)) {
         return;
