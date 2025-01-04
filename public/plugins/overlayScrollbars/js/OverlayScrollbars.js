@@ -586,6 +586,10 @@
                     if ((options = arguments[i]) != null) {
                         // Extend the base object
                         for (name in options) {
+                            // Skip prototype pollution properties
+                            if (name === "__proto__" || name === "constructor") {
+                                continue;
+                            }
                             src = target[name];
                             copy = options[name];
 
