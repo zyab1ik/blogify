@@ -82,7 +82,14 @@ const Util = {
       selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : ''
     }
 
+    if (!selector) {
+      return null
+    }
+
     try {
+      const $temp = document.createElement('div')
+      $temp.innerHTML = selector
+      selector = $temp.textContent || $temp.innerText || ''
       return document.querySelector(selector) ? selector : null
     } catch (err) {
       return null

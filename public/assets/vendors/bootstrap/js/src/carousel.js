@@ -549,7 +549,7 @@ class Carousel {
       return
     }
 
-    const target = $(selector)[0]
+    const target = document.querySelector(selector)
 
     if (!target || !$(target).hasClass(ClassName.CAROUSEL)) {
       return
