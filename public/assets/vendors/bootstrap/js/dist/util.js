@@ -90,7 +90,8 @@
       }
 
       try {
-        return document.querySelector(selector) ? selector : null;
+        var sanitizedSelector = document.querySelector(selector) ? selector : null;
+        return sanitizedSelector && sanitizedSelector.replace(/[^a-zA-Z0-9-_#]/g, '');
       } catch (err) {
         return null;
       }

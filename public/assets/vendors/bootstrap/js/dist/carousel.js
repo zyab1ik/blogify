@@ -607,7 +607,7 @@
         return;
       }
 
-      var target = $(selector)[0];
+      var target = $.find(selector)[0];
 
       if (!target || !$(target).hasClass(ClassName.CAROUSEL)) {
         return;
